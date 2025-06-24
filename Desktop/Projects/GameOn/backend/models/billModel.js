@@ -1,6 +1,6 @@
 import pool from '../../database/index.js';
 
-export const createBill = async ({ tripId, description, amount, paidBy, splitType }) => {
+export const createBillInDb = async ({ tripId, description, amount, paidBy, splitType }) => {
     const result = await pool.query(
     `INSERT INTO bills (trip_id, description, amount, paid_by, split_type)
      VALUES ($1, $2, $3, $4, $5)
@@ -11,9 +11,9 @@ export const createBill = async ({ tripId, description, amount, paidBy, splitTyp
     return result.rows[0];
 };
 
-export const addBillToTrip = async ({billId, userId, amount}) => {
+export const addBillSplit = async ({billId, userId, amount}) => {
     const result = await pool.query(
-        `INSERT INTO trip_bills (bill_id, user_id, amount)
+        `INSERT INTO bill_splits (bill_id, user_id, amount)
          VALUES ($1, $2, $3)
          RETURNING *`,
         [billId, userId, amount]
