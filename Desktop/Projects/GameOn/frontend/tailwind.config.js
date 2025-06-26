@@ -9,6 +9,19 @@ const config = {
       fontFamily: {
         'poppins': ['Poppins', 'sans-serif'],
       },
+      keyframes: {
+        highlight: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
+      },
+      animation: {
+        highlight: 'highlight 0.8s ease-out forwards',
+      },
+      colors: {
+        forest: '#517352',
+        highlight: '#afdeb0'
+      }
     },
   },
   plugins: [],
