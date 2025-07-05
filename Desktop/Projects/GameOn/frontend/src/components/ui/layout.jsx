@@ -24,15 +24,20 @@ export default function Layout(){
           <header className="flex justify-between items-center p-3 bg-white bg-opacity-80 border-b-2 border-gray-300">
             <div className="flex items-center space-x-2">
                 <img src="/logo.png" alt="Logo" className="w-8 h-8" />
-                <h1 className="text-xl font-mono">GameOn</h1>
+                <h1 className="text-xl font-mono">WeCheck</h1>
             </div>
-    
             <nav className="space-x-2">
               <Link
                 to="/dashboard"
                 className="inline-block bg-neutral-500 hover:bg-neutral-900 text-white font-mono py-1 px-2 rounded transition transform hover:scale-105"
               >
                 Dashboard
+              </Link>
+              <Link
+                to="/addHouse"
+                className="inline-block bg-neutral-500 hover:bg-neutral-900 text-white font-mono py-1 px-2 rounded transition transform hover:scale-105"
+              >
+                Add House
               </Link>
               <Link
                 to="/addEvent"

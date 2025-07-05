@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { getAuth } from "firebase/auth";
+import { auth } from "../auth/firebase"; 
 
+
+{/*yayy works */}
 export default function AddEventPage() {
     const [tripName, setTripName] = useState("");
-    const [tripDate, setTripDate] = useState("");
+    const [tripStartDate, setTripStartDate] = useState("");
     const [tripAmount, setTripAmount] = useState("");
     const [people, setPeople] = useState([{ name: "", amount: "" }]);
+    const [tripEndDate, setTripEndDate] = useState("");
 
     const navigate = useNavigate();
 
@@ -15,22 +20,55 @@ export default function AddEventPage() {
         setPeople(updated);
       };
     
-      const handleAddPerson = () => {
+    const handleAddPerson = () => {
         setPeople([...people, { name: "", amount: "" }]);
-      };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-  
-      console.log("Trip added:", {
-        name: tripName,
-        date: tripDate,
-        amount: tripAmount,
-        people,
-      });
-  
-      navigate("/dashboard");
     };
+  
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const user = auth.currentUser;
+      
+        if (!user) {
+          console.error("No authenticated user");
+          return;
+        }
+      
+        try {
+          // Sanitize people input
+          const sanitizedPeople = people.map((p) => ({
+            name: p.name,
+            amount: p.amount === "" ? 0 : Number(p.amount)
+          }));
+      
+          await fetch('http://localhost:5001/api/trips/add', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${await user.getIdToken()}`
+            },
+            body: JSON.stringify({
+              name: tripName,
+              description: "",
+              start_date: tripStartDate,
+              end_date: tripEndDate,
+              amount: tripAmount === "" ? 0 : Number(tripAmount),
+              people: sanitizedPeople
+            })
+          });
+      
+          console.log("Trip added:", {
+            name: tripName,
+            start_date: tripStartDate,
+            end_date: tripEndDate,
+            amount: tripAmount,
+            people: sanitizedPeople,
+          });
+      
+          navigate("/dashboard");
+        } catch (err) {
+          console.error('Failed to save trip:', err);
+        }
+      };
   
     return (
         <div className="relative min-h-screen bg-cover bg-center bg-no-repeat bg-[url('/assets/background.jpg')] text-center font-sans">
@@ -52,13 +90,23 @@ export default function AddEventPage() {
                     />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium mb-1">Trip Date</label>
+                    <label className="block text-sm font-medium mb-1">Trip Start Date</label>
                     <input
                     type="date"
-                    value={tripDate}
-                    onChange={(e) => setTripDate(e.target.value)}
+                    value={tripStartDate}
+                    onChange={(e) => setTripStartDate(e.target.value)}
                     required
                     className="w-full border px-3 py-2 rounded"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium mb-1">End Date</label>
+                    <input
+                        type="date"
+                        value={tripEndDate}
+                        onChange={(e) => setTripEndDate(e.target.value)}
+                        required
+                        className="w-full border px-3 py-2 rounded"
                     />
                 </div>
                 <div>
@@ -103,5 +151,5 @@ export default function AddEventPage() {
                 </form>
             </div>
         </div>
-    );
-  }
+    ); 
+}

@@ -2,8 +2,9 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import userRoutes from "../routes/userRoutes.js";
-import tripRoutes from "../routes/tripRoutes.js";
+import tripRoutes from "../routes/trips.js";
 import billRoutes from "../routes/billRoutes.js";
+import houseRoutes from "../routes/houseRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -20,6 +21,8 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/trips", tripRoutes);
 app.use("/api/bills", billRoutes);
+app.use("/api/house", houseRoutes);
+
 
 // Health check
 app.get("/", (req, res) => {

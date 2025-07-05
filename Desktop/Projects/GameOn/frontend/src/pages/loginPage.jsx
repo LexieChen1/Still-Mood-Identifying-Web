@@ -33,7 +33,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-cover bg-center bg-no-repeat bg-[url('/assets/background.jpg')] flex flex-col items-center justify-center font-sans">
       <div className="p-6 bg-white bg-opacity-70 backdrop-blur-md rounded-xl m-6 shadow-lg text-center space-y-4">
-        <h1 className="text-2xl font-mono mb-4">Log in to GameOn</h1>
+        <h1 className="text-2xl font-mono mb-4">Log in to WeCheck</h1>
 
         <button
           onClick={googleLogin}

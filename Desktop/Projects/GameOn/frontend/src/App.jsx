@@ -6,6 +6,11 @@ import Dashboard from './pages/dashboardPage.jsx';
 import AddEventPage from './pages/addEventPage.jsx';
 import Layout from "./components/ui/layout.jsx"; 
 import Login from "./pages/loginPage.jsx"; 
+import TripDetails from "./pages/tripDetails.jsx";
+import QuickSplit from './pages/quickSplit.jsx';
+import AddHouse from "./pages/addHousePage.jsx"
+import HouseDashboard from './pages/houseDashboard.jsx';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -21,8 +26,12 @@ function App()
         <Route element={<Layout />}>
           <Route path="/signup" element={<Signup />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/addHouse" element={<AddHouse />} />
           <Route path="/addEvent" element={<AddEventPage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/trip/:id" element={<TripDetails />} />
+          <Route path="/quicksplit" element={<QuickSplit />} />
+          <Route path="/house" element={<HouseDashboard />} />
         </Route>
       </Routes>
       <ToastContainer position="top-center" autoClose={3000} />
