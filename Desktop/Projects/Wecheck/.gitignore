@@ -1,0 +1,29 @@
+# Node.js dependencies
+node_modules/
+
+# Local environment config
+.env
+.env.local
+.env.*.local
+
+# Firebase service keys
+serviceAccountKey.json
+
+# Database
+*.sqlite
+*.db
+*.sql
+
+# Build and logs
+dist/
+build/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.dbbackend/serviceAccountKey.json
+
+node_modules
+.git
+
+backend/serviceAccountKey.json
