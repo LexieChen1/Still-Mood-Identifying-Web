@@ -1,0 +1,6 @@
+
+.env
+**/serviceAccountKey.json
+.env
+application.properties
+target/
