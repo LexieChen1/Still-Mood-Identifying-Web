@@ -5,6 +5,7 @@ import userRoutes from "../routes/userRoutes.js";
 import tripRoutes from "../routes/trips.js";
 import billRoutes from "../routes/billRoutes.js";
 import houseRoutes from "../routes/houseRoutes.js";
+import profileRoutes from "../routes/myProfile.js"; 
 
 dotenv.config();
 const app = express();
@@ -15,14 +16,17 @@ app.use(
     credentials: true, 
   })
 );
-app.use(express.json());
+
+// Increase body parser limit for large image data
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/trips", tripRoutes);
 app.use("/api/bills", billRoutes);
-app.use("/api/house", houseRoutes);
-
+app.use("/api/houses", houseRoutes);
+app.use("/api/profile", profileRoutes); 
 
 // Health check
 app.get("/", (req, res) => {

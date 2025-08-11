@@ -15,12 +15,6 @@ export default function LandingPage() {
         {/*nav bars */}
         <nav className="space-x-2">
           <Link
-            to="/quicksplit"
-            className="bg-neutral-500 hover:bg-neutral-900 text-white font-mono py-1 px-2 rounded transition transform hover:scale-105"
-          >
-            Quick Split
-          </Link>
-          <Link
             to="/login"
             className="bg-neutral-500 hover:bg-neutral-900 text-white font-mono py-1 px-2 rounded transition transform hover:scale-105"
           >
